@@ -1,7 +1,7 @@
-@import url(https://fonts.googleapis.com/css?family=Kanit:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
+@import url(https://fonts.googleapis.com/css?family=Rubik:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
 
 body {
-  font-family: "Kanit", sans-serif;
+  font-family: "Rubik", sans-serif;
   margin: 0 32px;
   background-color: #eef7ff;
 }
@@ -33,6 +33,7 @@ main h1 {
 .expense-table {
   width: 100%;
   border-collapse: collapse;
+  align-self: flex-start;
 }
 
 .expense-table select {
@@ -75,14 +76,15 @@ main h1 {
 .expense-table td {
   border: 1px solid #444;
   text-align: left;
-  padding: 4px 8px;
+  padding: 6px 8px;
   background-color: white;
 }
 
 .input-container {
   display: flex;
   flex-direction: column;
-  margin-bottom: 12px;
+  margin-bottom: 18px;
+  position: relative;
 }
 
 .input-container label {
@@ -92,6 +94,7 @@ main h1 {
 .input-container input {
   height: 28px;
   font-family: inherit;
+  outline: none;
 }
 
 #category {
@@ -131,6 +134,14 @@ main h1 {
 
 .context-menu div:hover {
   background-color: #ddd;
+}
+
+.error {
+  font-size: 12px;
+  color: red;
+  margin: 0;
+  position: absolute;
+  top: 100%;
 }
 
 @media (max-width: 900px) {

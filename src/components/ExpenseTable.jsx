@@ -1,14 +1,33 @@
-const ExpenseTable = ({ expenses }) => {
+import { useState } from "react";
+import ContextMenu from "./ContextMenu";
+import useFilter from "../hooks/useFilter";
+
+const ExpenseTable = ({ expenses, setExpenses }) => {
+  const [filteredData, setQuery] = useFilter(expenses, (data) => data.category);
+  const [menuPosition, setMenuPosition] = useState({});
+  const [rowId, setRowId] = useState("");
+
+  const total = filteredData.reduce(
+    (accumulator, current) => accumulator + current.amount,
+    0
+  );
+
   return (
     <div className="expense-table-container">
       <h3>Expenses Data</h3>
-      <table className="expense-table">
+      <ContextMenu
+        menuPosition={menuPosition}
+        setMenuPosition={setMenuPosition}
+        setExpenses={setExpenses}
+        rowId={rowId}
+      />
+      <table className="expense-table" onClick={() => setMenuPosition({})}>
         <thead>
           <tr>
-            <th>Description</th>
+            <th>Title</th>
             <th>
-              <select>
-                <option value>All</option>
+              <select onChange={(e) => setQuery(e.target.value.toLowerCase())}>
+                <option value="">All</option>
                 <option value="grocery">Grocery</option>
                 <option value="clothes">Clothes</option>
                 <option value="bills">Bills</option>
@@ -21,7 +40,7 @@ const ExpenseTable = ({ expenses }) => {
                 <span>Amount</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width={10}
+                  width="10"
                   viewBox="0 0 384 512"
                   className="arrow up-arrow"
                 >
@@ -30,7 +49,7 @@ const ExpenseTable = ({ expenses }) => {
                 </svg>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width={10}
+                  width="10"
                   viewBox="0 0 384 512"
                   className="arrow down-arrow"
                 >
@@ -42,13 +61,15 @@ const ExpenseTable = ({ expenses }) => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Milk</td>
-            <td>Grocery</td>
-            <td>₹40</td>
-          </tr>
-          {expenses.map(({ id, title, category, amount }) => (
-            <tr key={id}>
+          {filteredData.map(({ id, title, category, amount }) => (
+            <tr
+              key={id}
+              onContextMenu={(e) => {
+                e.preventDefault();
+                setMenuPosition({ left: e.clientX + 4, top: e.clientY + 4 });
+                setRowId(id);
+              }}
+            >
               <td>{title}</td>
               <td>{category}</td>
               <td>₹{amount}</td>
@@ -57,7 +78,7 @@ const ExpenseTable = ({ expenses }) => {
           <tr>
             <th>Total</th>
             <th></th>
-            <th>₹3000</th>
+            <th>₹{total}</th>
           </tr>
         </tbody>
       </table>
