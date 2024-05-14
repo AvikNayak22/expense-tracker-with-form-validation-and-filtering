@@ -1,9 +1,14 @@
+/* eslint-disable react/prop-types */
+
 import React from "react";
 
 export default function ContextMenu({
   menuPosition,
   setMenuPosition,
   setExpenses,
+  setExpense,
+  expenses,
+  setEditingRowId,
   rowId,
 }) {
   if (!menuPosition.left) return;
@@ -11,7 +16,11 @@ export default function ContextMenu({
     <div className="context-menu" style={{ ...menuPosition }}>
       <div
         onClick={() => {
-          console.log("Editing");
+          const { title, category, amount } = expenses.find(
+            (expense) => expense.id === rowId
+          );
+          setEditingRowId(rowId);
+          setExpense({ title, category, amount });
           setMenuPosition({});
         }}
       >

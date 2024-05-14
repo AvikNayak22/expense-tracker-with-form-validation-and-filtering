@@ -1,18 +1,13 @@
-@import url(https://fonts.googleapis.com/css?family=Rubik:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Nunito:wght@300;400;600;700;800;900&family=Russo+One&family=Spartan:wght@700;800;900&display=swap");
 
 body {
-  font-family: "Rubik", sans-serif;
+  font-family: "Nunito", sans-serif;
   margin: 0 32px;
-  background-color: #eef7ff;
 }
 
 main {
   max-width: 900px;
   margin-inline: auto;
-}
-
-main h1 {
-  text-align: center;
 }
 
 * {
@@ -22,12 +17,10 @@ main h1 {
 .expense-tracker {
   display: flex;
   gap: 32px;
-  flex-direction: column;
 }
 
 .expense-form {
-  width: 50%;
-  margin-inline: auto;
+  width: 100%;
 }
 
 .expense-table {
@@ -76,8 +69,7 @@ main h1 {
 .expense-table td {
   border: 1px solid #444;
   text-align: left;
-  padding: 6px 8px;
-  background-color: white;
+  padding: 4px 8px;
 }
 
 .input-container {
@@ -94,7 +86,6 @@ main h1 {
 .input-container input {
   height: 28px;
   font-family: inherit;
-  outline: none;
 }
 
 #category {
@@ -108,19 +99,12 @@ main h1 {
   font-size: 18px;
   font-family: inherit;
   margin-top: 8px;
-  background-color: white;
-  border: 1px solid black;
-}
-
-.add-btn:active {
-  scale: 0.98;
 }
 
 .context-menu {
   background-color: white;
   border: 1px solid;
   position: absolute;
-  display: none;
   border-radius: 4px;
   overflow: hidden;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
@@ -136,6 +120,10 @@ main h1 {
   background-color: #ddd;
 }
 
+.clear-sort {
+  cursor: pointer;
+}
+
 .error {
   font-size: 12px;
   color: red;
@@ -143,13 +131,12 @@ main h1 {
   position: absolute;
   top: 100%;
 }
-
 @media (max-width: 900px) {
   body {
     margin-inline: 16px;
   }
 
-  .expense-form {
-    width: 100%;
+  .expense-tracker {
+    flex-direction: column;
   }
 }
